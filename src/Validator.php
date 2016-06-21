@@ -58,7 +58,7 @@ class Validator
      */
     public function __construct(
         $validatorUrl = self::DEFAULT_URL,
-        $profile = self::PROFILE_CSS2,
+        $profile = self::PROFILE_CSS3,
         $warningLevel = self::WARNING_LEVEL_FULL
     ) {
         $this->setClient(new Client(['base_uri' => $validatorUrl]));
