@@ -9,7 +9,7 @@ class Message
     protected $source;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $line;
 
@@ -29,10 +29,19 @@ class Message
     protected $message;
 
     /**
+     * @var array
+     */
+    protected $defaults = [
+        'line' => null,
+    ];
+
+    /**
      * @param array $attributes
      */
     public function __construct(array $attributes)
     {
+        $attributes = array_merge($this->defaults, $attributes);
+
         $this->source = $attributes['source'];
         $this->line = $attributes['line'];
         $this->context = $attributes['context'];
