@@ -14,7 +14,7 @@ class Message
     protected $line;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $context;
 
@@ -33,6 +33,7 @@ class Message
      */
     protected $defaults = [
         'line' => null,
+        'context' => null,
     ];
 
     /**
@@ -58,7 +59,7 @@ class Message
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getLine()
     {
@@ -66,7 +67,7 @@ class Message
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getContext()
     {
