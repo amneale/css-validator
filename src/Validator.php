@@ -42,16 +42,6 @@ class Validator
     private $warningLevel;
 
     /**
-     * @var Message[]
-     */
-    private $errors = [];
-
-    /**
-     * @var Message[]
-     */
-    private $warnings = [];
-
-    /**
      * @param string $validatorUrl
      * @param string $profile
      * @param string $warningLevel
@@ -114,22 +104,6 @@ class Validator
     }
 
     /**
-     * @return Message[]
-     */
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
-    /**
-     * @return Message[]
-     */
-    public function getWarnings()
-    {
-        return $this->warnings;
-    }
-
-    /**
      * @param $url
      * @return Message[]
      * @throws RuntimeException
@@ -156,20 +130,21 @@ class Validator
             throw new RuntimeException('Server did not respond with the expected content-type (application/json)');
         }
 
+        $messages = [];
         $result = json_decode($response->getBody(), true);
 
         if (isset($result['cssvalidation']['errors'])) {
             foreach ($result['cssvalidation']['errors'] as $messageAttributes) {
-                $this->errors[] = new Message($messageAttributes);
+                $messages[] = new Message('error', $messageAttributes);
             }
         }
 
         if (isset($result['cssvalidation']['warnings'])) {
             foreach ($result['cssvalidation']['warnings'] as $messageAttributes) {
-                $this->warnings[] = new Message($messageAttributes);
+                $warnings[] = new Message('warning', $messageAttributes);
             }
         }
 
-        return $this->getErrors();
+        return $messages;
     }
 }

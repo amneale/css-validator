@@ -6,6 +6,11 @@ class Message
     /**
      * @var string
      */
+    protected $messageType;
+
+    /**
+     * @var string
+     */
     protected $source;
 
     /**
@@ -37,17 +42,27 @@ class Message
     ];
 
     /**
+     * @param string $messageType
      * @param array $attributes
      */
-    public function __construct(array $attributes)
+    public function __construct($messageType, array $attributes)
     {
         $attributes = array_merge($this->defaults, $attributes);
 
+        $this->messageType = $messageType;
         $this->source = $attributes['source'];
         $this->line = $attributes['line'];
         $this->context = $attributes['context'];
         $this->type = $attributes['type'];
         $this->message = $attributes['message'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessageType()
+    {
+        return $this->messageType;
     }
 
     /**
