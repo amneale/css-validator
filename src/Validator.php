@@ -53,6 +53,7 @@ class Validator
     ) {
         $this->setClient(new Client(['base_uri' => $validatorUrl]));
         $this->setProfile($profile);
+        $this->setWarningLevel($warningLevel);
     }
 
     /**

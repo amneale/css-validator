@@ -34,14 +34,15 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
     public function testConstructionWithNonDefaultArguments()
     {
-        $validator = new Validator(self::TEST_URL, Validator::PROFILE_CSS3);
+        $validator = new Validator(self::TEST_URL, Validator::PROFILE_CSS2, Validator::WARNING_LEVEL_NONE);
 
         $this->assertInstanceOf(Validator::class, $validator);
 
         $this->assertInstanceOf(Client::class, $validator->getClient());
         $this->assertEquals(new Client(['base_uri' => self::TEST_URL]), $validator->getClient());
 
-        $this->assertEquals(Validator::PROFILE_CSS3, $validator->getProfile());
+        $this->assertEquals(Validator::PROFILE_CSS2, $validator->getProfile());
+        $this->assertEquals(Validator::WARNING_LEVEL_NONE, $validator->getWarningLevel());
     }
 
     public function testGetAndSetClient()
